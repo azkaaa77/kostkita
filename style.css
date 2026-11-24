@@ -1,405 +1,233 @@
-/* style.css - Minimal Color Palette, NO GRADIENTS, Ultra-Transparent Glassmorphism, Responsive Fixes & Rich 60fps Animations */
+// script.js - Vanilla JS: Scroll Progress, Mobile Nav Drawer, Staggered Reveal (60fps), 3D Tilt Card & Interactive Form
 
-:root {
-  /* Strictly Solid Color Palette */
-  --bg-dark: #0b0f17;         /* Deep Obsidian / Charcoal solid background */
-  --text-main: #f8fafc;       /* Off-white solid text */
-  --text-muted: #94a3b8;      /* Neutral slate secondary text */
-  --accent: #0284c7;          /* Soft Vibrant Sky Blue solid accent */
-  --accent-hover: #0369a1;    /* Accent solid hover */
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Scroll Progress Bar Indicator
+  const progressBar = document.getElementById('scroll-progress-bar');
+  const updateScrollProgress = () => {
+    if (!progressBar) return;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = `${Math.min(100, Math.max(0, scrollPercent))}%`;
+  };
 
-  /* High Transparency Glassmorphism System - Pure solid RGBA (0.03 - 0.08), Crisp borders & Inner Specular */
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-hover: rgba(255, 255, 255, 0.07);
-  --glass-pill-bg: rgba(255, 255, 255, 0.05);
-  --glass-elevated-bg: rgba(255, 255, 255, 0.06);
-  --glass-input-bg: rgba(255, 255, 255, 0.03);
-  
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-border-focus: rgba(2, 132, 199, 0.7);
-  --glass-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
-  --specular-inner: inset 0 1px 1px rgba(255, 255, 255, 0.22);
-}
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  updateScrollProgress();
 
-html {
-  scroll-behavior: smooth;
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  overflow-x: hidden;
-  max-width: 100vw;
-}
+  // 2. Mobile Navigation Toggle with Smooth Drawer Animation
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  overflow-x: hidden;
-  max-width: 100vw;
-  position: relative;
-}
+  if (mobileMenuBtn && mobileMenu) {
+    const toggleMobileMenu = (open) => {
+      const willOpen = open !== undefined ? open : mobileMenu.classList.contains('hidden');
+      if (willOpen) {
+        mobileMenu.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          mobileMenu.classList.add('open');
+          mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        });
+      } else {
+        mobileMenu.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        setTimeout(() => {
+          if (!mobileMenu.classList.contains('open')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }, 250);
+      }
+    };
 
-/* Expressive Typography Class */
-.font-expressive {
-  font-family: 'Lobster', cursive;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-}
+    mobileMenuBtn.addEventListener('click', () => {
+      toggleMobileMenu();
+    });
 
-/* ==================== SCROLL PROGRESS INDICATOR ==================== */
-#scroll-progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background-color: var(--accent);
-  width: 0%;
-  z-index: 100;
-  pointer-events: none;
-  transition: width 0.1s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: width;
-}
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMobileMenu(false);
+      });
+    });
 
-/* ==================== ULTRA-TRANSPARENT GLASSMORPHISM ==================== */
-.glass-pill {
-  background-color: var(--glass-pill-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow), var(--specular-inner);
-  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), 
-              border-color 0.24s ease, 
-              background-color 0.24s ease, 
-              box-shadow 0.24s ease,
-              padding 0.24s ease;
-}
-
-.glass-panel {
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow), var(--specular-inner);
-}
-
-.glass-panel-elevated {
-  background-color: var(--glass-elevated-bg);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), var(--specular-inner);
-}
-
-.glass-input {
-  background-color: var(--glass-input-bg);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid var(--glass-border);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-  color: var(--text-main);
-  transition: border-color 0.22s cubic-bezier(0.22, 1, 0.36, 1), 
-              box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-              background-color 0.22s ease;
-}
-
-/* Ensure select elements render clearly on all OS and mobile browsers */
-select.glass-input {
-  background-color: #0f172a;
-  color: #f8fafc;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230284c7' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1.15rem;
-  padding-right: 2.75rem;
-}
-
-select.glass-input option {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  padding: 10px 14px;
-  font-size: 0.875rem;
-}
-
-select.glass-input option:disabled {
-  color: #64748b !important;
-}
-
-.glass-input:focus {
-  background-color: rgba(255, 255, 255, 0.07);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.3), var(--specular-inner);
-  outline: none;
-}
-
-/* ==================== AMBIENT SOLID BACKGROUND SHAPES ==================== */
-/* Placed behind glass panels, strictly overflow-safe & performant */
-.solid-backdrop-disc-1 {
-  position: absolute;
-  width: min(420px, 90vw);
-  height: min(420px, 90vw);
-  background-color: rgba(2, 132, 199, 0.16);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-  animation: floatAmbient 14s infinite ease-in-out;
-}
-
-.solid-backdrop-disc-2 {
-  position: absolute;
-  width: min(480px, 95vw);
-  height: min(480px, 95vw);
-  background-color: rgba(2, 132, 199, 0.12);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-  animation: floatAmbientAlt 18s infinite ease-in-out;
-}
-
-.solid-backdrop-disc-3 {
-  position: absolute;
-  width: min(320px, 80vw);
-  height: min(320px, 80vw);
-  background-color: rgba(2, 132, 199, 0.14);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  will-change: transform;
-  animation: floatAmbient 12s infinite ease-in-out reverse;
-}
-
-/* Ambient Floating Animations for Background Discs */
-@keyframes floatAmbient {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.classList.contains('hidden') && 
+          !mobileMenu.contains(e.target) && 
+          !mobileMenuBtn.contains(e.target)) {
+        toggleMobileMenu(false);
+      }
+    });
   }
-  50% {
-    transform: translate(18px, -24px) scale(1.05);
+
+  // 3. Smooth Scroll Spy / Pill Navbar Dynamic Border & Compact State
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      navbar.classList.add('shadow-2xl');
+      navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
+      navbar.style.borderColor = 'rgba(255, 255, 255, 0.28)';
+      navbar.style.paddingTop = '0.65rem';
+      navbar.style.paddingBottom = '0.65rem';
+    } else {
+      navbar.classList.remove('shadow-2xl');
+      navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+      navbar.style.borderColor = 'rgba(255, 255, 255, 0.18)';
+      navbar.style.paddingTop = '0.75rem';
+      navbar.style.paddingBottom = '0.75rem';
+    }
+  }, { passive: true });
+
+  // 4. 60fps Staggered Scroll Reveal Observer
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.08,
+      rootMargin: '0px 0px -25px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('revealed'));
   }
-}
 
-@keyframes floatAmbientAlt {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+  // 5. Subtle 3D Tilt Effect on Hero Card (Mouse / Pointer only, disabled on touch/reduced-motion)
+  const tiltContainer = document.querySelector('.tilt-card-container');
+  const tiltCard = document.querySelector('.tilt-card');
+
+  if (tiltContainer && tiltCard && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReducedMotion) {
+      let isHovering = false;
+
+      tiltContainer.addEventListener('mouseenter', () => {
+        isHovering = true;
+      });
+
+      tiltContainer.addEventListener('mousemove', (e) => {
+        if (!isHovering) return;
+        const rect = tiltContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // Subtle tilt: max ±6 degrees for elegant professional polish
+        const rotateX = ((centerY - y) / centerY) * 6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+
+        tiltCard.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+      });
+
+      tiltContainer.addEventListener('mouseleave', () => {
+        isHovering = false;
+        tiltCard.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+      });
+    }
   }
-  50% {
-    transform: translate(-22px, 20px) scale(1.06);
+
+  // 6. Smooth scroll handler for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        targetEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // 7. KostAdvisor Consultation Form Handling with Animated State Feedback
+  const advisorForm = document.getElementById('advisor-form');
+  const formStatus = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submit-btn');
+
+  if (advisorForm) {
+    advisorForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('user-name').value.trim();
+      const whatsapp = document.getElementById('user-wa').value.trim();
+      const campus = document.getElementById('user-campus').value;
+      const budget = document.getElementById('user-budget').value;
+
+      if (!name || !whatsapp || !campus || !budget) {
+        showStatus('Harap isi semua kolom wajib bertanda bintang (*).', 'error');
+        return;
+      }
+
+      // Collect selected preferences checkboxes
+      const selectedPrefs = Array.from(document.querySelectorAll('input[name="preferences"]:checked')).map(cb => cb.value);
+
+      // Loading state with spinner
+      submitBtn.disabled = true;
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Menghubungkan ke KostAdvisor...
+      `;
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        showStatus(
+          `Halo <strong>${name}</strong>! Preferensi kos untuk area <strong>${campus}</strong> telah diterima. Rekomendasi kos bebas banjir & bergaransi Rekber Escrow sedang dikirim ke WhatsApp <strong>${whatsapp}</strong> oleh tim kurator kami.`,
+          'success'
+        );
+        advisorForm.reset();
+      }, 900);
+    });
   }
-}
 
-/* Subtle Floating Motion for Hero Badges */
-.floating-badge {
-  will-change: transform;
-  animation: subtleFloat 6s infinite ease-in-out;
-}
+  function showStatus(message, type) {
+    if (!formStatus) return;
+    formStatus.classList.remove('hidden', 'border-sky-500', 'text-sky-200', 'border-rose-500', 'text-rose-200', 'form-status-animate');
 
-.floating-badge-delayed {
-  will-change: transform;
-  animation: subtleFloat 6s infinite ease-in-out 3s;
-}
+    // Force animation reflow
+    void formStatus.offsetWidth;
+    formStatus.classList.add('form-status-animate');
 
-@keyframes subtleFloat {
-  0%, 100% {
-    transform: translateY(0);
+    if (type === 'success') {
+      formStatus.classList.add('border', 'border-sky-500/50', 'text-sky-200');
+      formStatus.style.backgroundColor = 'rgba(2, 132, 199, 0.08)';
+      formStatus.innerHTML = `
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div class="text-sm leading-relaxed">${message}</div>
+        </div>
+      `;
+    } else {
+      formStatus.classList.add('border', 'border-rose-500/50', 'text-rose-200');
+      formStatus.style.backgroundColor = 'rgba(244, 63, 94, 0.08)';
+      formStatus.innerHTML = `
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div class="text-sm leading-relaxed">${message}</div>
+        </div>
+      `;
+    }
+
+    formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-/* ==================== HERO STAGGERED ENTRANCE ==================== */
-.hero-stagger-item {
-  opacity: 0;
-  transform: translateY(22px);
-  animation: heroItemFadeIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  will-change: opacity, transform;
-}
-
-.hero-delay-1 { animation-delay: 0.1s; }
-.hero-delay-2 { animation-delay: 0.22s; }
-.hero-delay-3 { animation-delay: 0.34s; }
-.hero-delay-4 { animation-delay: 0.46s; }
-.hero-delay-5 { animation-delay: 0.58s; }
-.hero-delay-6 { animation-delay: 0.70s; }
-.hero-delay-card { animation-delay: 0.38s; }
-
-@keyframes heroItemFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ==================== 60FPS MICRO-INTERACTIONS ==================== */
-.glass-interactive {
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), 
-              border-color 0.28s ease, 
-              background-color 0.28s ease,
-              box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, box-shadow;
-}
-
-.glass-interactive:hover {
-  transform: translateY(-6px);
-  background-color: var(--glass-bg-hover);
-  border-color: rgba(255, 255, 255, 0.32);
-  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.35);
-}
-
-/* Tactile / Magnetic Press on Buttons & Links */
-.btn-press {
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), 
-              background-color 0.18s ease,
-              box-shadow 0.18s ease;
-  will-change: transform;
-}
-
-.btn-press:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
-}
-
-.btn-press:active {
-  transform: translateY(1px) scale(0.97);
-}
-
-/* 3D Tilt Wrapper for Hero Card */
-.tilt-card-container {
-  perspective: 1000px;
-}
-
-.tilt-card {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-/* Mobile Menu Slide & Fade Animation */
-.mobile-menu-drawer {
-  opacity: 0;
-  transform: translateY(-12px) scale(0.98);
-  transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-.mobile-menu-drawer.open {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Status message animation */
-.form-status-animate {
-  animation: statusFadeSlide 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes statusFadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ==================== STAGGERED SCROLL REVEAL (60FPS) ==================== */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), 
-              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-on-scroll.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger transition delay helpers for grids */
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
-.reveal-delay-4 { transition-delay: 0.32s; }
-.reveal-delay-5 { transition-delay: 0.40s; }
-.reveal-delay-6 { transition-delay: 0.48s; }
-
-/* Custom Scrollbar Minimal */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
-
-/* Mobile & Touch Specific Optimizations */
-@media (max-width: 639px) {
-  .glass-pill {
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-  }
-  .glass-panel {
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-  }
-  .glass-panel-elevated {
-    backdrop-filter: blur(20px) saturate(170%);
-    -webkit-backdrop-filter: blur(20px) saturate(170%);
-  }
-  /* On mobile touch devices, limit hover lift to avoid sticky states */
-  .glass-interactive:hover {
-    transform: none;
-  }
-}
-
-/* Accessibility: Honor Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .solid-backdrop-disc-1,
-  .solid-backdrop-disc-2,
-  .solid-backdrop-disc-3,
-  .floating-badge,
-  .floating-badge-delayed,
-  .hero-stagger-item,
-  .form-status-animate {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  .glass-interactive:hover,
-  .btn-press:hover,
-  .btn-press:active {
-    transform: none !important;
-  }
-  .tilt-card {
-    transform: none !important;
-  }
-  .reveal-on-scroll {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-  .mobile-menu-drawer {
-    transition: none !important;
-    transform: none !important;
-  }
-}
+});
