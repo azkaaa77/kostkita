@@ -1,0 +1,1617 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KostKita - Kost aman, uang aman, kuliah tenang.</title>
+    <meta
+      name="description"
+      content="Platform pencarian dan manajemen kos khusus mahasiswa rantau. Aman dengan Rekber Escrow, Booking Survei Gratis tanpa komitmen, dan panduan KostAdvisor 1-on-1."
+    />
+
+    <!-- Google Fonts: Plus Jakarta Sans (Clean Modern) & Lobster (Expressive Accent) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              obsidian: "#0b0f17" /* 1 Solid Dark Background */,
+              offwhite: "#f8fafc" /* 1 Light Solid Text */,
+              primary: "#0284c7" /* 1 Primary Solid Accent (Sky/Teal soft) */,
+              "primary-dark": "#0369a1" /* Solid Hover */,
+              slateborder: "rgba(255, 255, 255, 0.18)",
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+              expressive: ['"Lobster"', "cursive"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom CSS (High Transparency Glassmorphism, NO Gradients, Strict Solids, 60fps Animation) -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="bg-obsidian text-offwhite antialiased selection:bg-primary selection:text-white relative min-h-screen overflow-x-hidden"
+  >
+    <!-- Scroll Progress Bar Indicator -->
+    <div id="scroll-progress-bar" aria-hidden="true"></div>
+
+    <!-- Ambient Backdrop Circles (Contained inside overflow-hidden parent to prevent horizontal scrollbar on mobile) -->
+    <div
+      class="absolute inset-0 pointer-events-none overflow-hidden"
+      aria-hidden="true"
+    >
+      <div class="solid-backdrop-disc-1 top-8 left-1/3 -translate-x-1/2"></div>
+      <div class="solid-backdrop-disc-2 top-96 right-4 sm:right-6"></div>
+      <div class="solid-backdrop-disc-3 top-[1400px] left-4 sm:left-10"></div>
+      <div class="solid-backdrop-disc-1 top-[2200px] right-6 sm:right-12"></div>
+      <div class="solid-backdrop-disc-2 top-[3000px] left-1/4"></div>
+    </div>
+
+    <!-- ==================== 1. FLOATING PILL NAVBAR ==================== -->
+    <header
+      class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 max-w-6xl mx-auto"
+    >
+      <nav
+        id="navbar"
+        class="glass-pill rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between transition-all duration-300"
+      >
+        <!-- Brand Logo with Expressive Typography -->
+        <a
+          href="#"
+          class="flex items-center gap-2.5 focus:outline-none focus:ring-1 focus:ring-primary rounded-full pr-2 btn-press"
+        >
+          <div
+            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm shadow-md shrink-0"
+          >
+            <svg
+              class="w-4 h-4 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+          </div>
+          <div class="flex items-baseline gap-1.5">
+            <span
+              class="font-expressive text-lg sm:text-xl text-offwhite tracking-wide"
+              >KostKita</span
+            >
+            <span
+              class="text-[11px] text-slate-400 font-medium tracking-normal italic hidden lg:inline"
+            ></span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav Items -->
+        <ul
+          class="hidden md:flex items-center gap-1 lg:gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300"
+        >
+          <li>
+            <a
+              href="#masalah"
+              class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-colors"
+              >Tantangan</a
+            >
+          </li>
+          <li>
+            <a
+              href="#manfaat"
+              class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-colors"
+              >Keunggulan USP</a
+            >
+          </li>
+          <li>
+            <a
+              href="#alur-race"
+              class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-colors"
+              >Alur Aman</a
+            >
+          </li>
+          <li>
+            <a
+              href="#testimoni"
+              class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-colors"
+              >Cerita Rantau</a
+            >
+          </li>
+          <li>
+            <a
+              href="#konsultasi"
+              class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-colors"
+              >KostAdvisor</a
+            >
+          </li>
+        </ul>
+
+        <!-- CTA Buttons & Mobile Hamburger -->
+        <div class="flex items-center gap-2">
+          <a
+            href="#konsultasi"
+            class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-primary hover:bg-primary-dark text-white transition-colors shadow-sm btn-press"
+          >
+            <span>Cari Kos Cocok</span>
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </a>
+
+          <!-- Mobile Menu Hamburger -->
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            aria-label="Buka Menu"
+            aria-expanded="false"
+            class="md:hidden p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-1 focus:ring-primary btn-press"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Menu Dropdown (Drawer Animation with Backdrop Blur) -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden mt-2 p-4 rounded-2xl glass-panel-elevated shadow-2xl mobile-menu-drawer"
+      >
+        <ul class="flex flex-col gap-2 text-sm font-medium">
+          <li>
+            <a
+              href="#masalah"
+              class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors"
+              >Tantangan Mahasiswa</a
+            >
+          </li>
+          <li>
+            <a
+              href="#manfaat"
+              class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors"
+              >Keunggulan & Rekber Escrow</a
+            >
+          </li>
+          <li>
+            <a
+              href="#alur-race"
+              class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors"
+              >Alur Survei & Booking</a
+            >
+          </li>
+          <li>
+            <a
+              href="#testimoni"
+              class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors"
+              >Cerita Kos Gue</a
+            >
+          </li>
+          <li>
+            <a
+              href="#konsultasi"
+              class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-primary font-bold hover:bg-white/10 active:bg-white/15 transition-colors"
+              >Form KostAdvisor 1-on-1</a
+            >
+          </li>
+        </ul>
+        <div class="mt-3 pt-3 border-t border-slateborder">
+          <a
+            href="#konsultasi"
+            class="mobile-nav-link flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold bg-primary hover:bg-primary-dark text-white btn-press"
+          >
+            <span>Booking Survei Gratis</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="relative z-10 pt-24 sm:pt-32 lg:pt-36">
+      <!-- ==================== 2. HERO SECTION ==================== -->
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-12 lg:py-16">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
+        >
+          <!-- Hero Text (Staggered entrance on load) -->
+          <div class="lg:col-span-7 space-y-5 sm:space-y-6">
+            <!-- Slogan Badge with Expressive Typography Accent -->
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel text-slate-300 text-xs sm:text-sm font-medium floating-badge hero-stagger-item hero-delay-1 max-w-full"
+            >
+              <span class="w-2 h-2 rounded-full bg-primary shrink-0"></span>
+              <span class="truncate sm:whitespace-normal">
+                <em class="text-offwhite font-semibold"
+                  >"Kost aman, uang aman, kuliah tenang."</em
+                ></span
+              >
+            </div>
+
+            <!-- Headline with Italic Emphasis -->
+            <h1
+              class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-offwhite leading-[1.2] sm:leading-[1.15] hero-stagger-item hero-delay-2"
+            >
+              Cari Kos Rantau Bebas
+              <span class="text-primary italic font-serif">Tipu-tipu</span> &
+              Drama DP, Dekat Kampus Idaman.
+            </h1>
+
+            <!-- Subjudul -->
+            <p
+              class="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl hero-stagger-item hero-delay-3"
+            >
+              Solusi praktis untuk mahasiswa baru dan perantau. Temukan hunian
+              nyaman dekat kampus dan kebutuhan harian tanpa resiko iklan palsu,
+              biaya siluman, atau salah pilih kamar.
+            </p>
+
+            <!-- Key Checklist Hero -->
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1 text-xs sm:text-sm text-slate-300 hero-stagger-item hero-delay-4"
+            >
+              <div class="flex items-center gap-2">
+                <svg
+                  class="w-4 h-4 text-primary shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Uang DP aman di <em>Rekber Escrow</em></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg
+                  class="w-4 h-4 text-primary shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Live Video Survei Tanpa Komitmen</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg
+                  class="w-4 h-4 text-primary shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Skor Lingkungan Anti-Banjir & Bising</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg
+                  class="w-4 h-4 text-primary shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Jarak Jalan Kaki ke Kampus & Kuliner</span>
+              </div>
+            </div>
+
+            <!-- CTA Buttons (Strictly Solid) -->
+            <div
+              class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 hero-stagger-item hero-delay-5"
+            >
+              <a
+                href="#konsultasi"
+                class="px-6 py-3.5 rounded-full font-bold text-sm sm:text-base text-center text-white bg-primary hover:bg-primary-dark shadow-md transition-colors btn-press"
+              >
+                Cari Kos yang Cocok Buat Gue
+              </a>
+              <a
+                href="#alur-race"
+                class="px-6 py-3.5 rounded-full font-semibold text-sm sm:text-base text-center text-slate-200 glass-panel hover:bg-white/10 transition-colors flex items-center justify-center gap-2 btn-press"
+              >
+                <svg
+                  class="w-4 h-4 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>Demo Video Survei Gratis</span>
+              </a>
+            </div>
+
+            <!-- Trust Proof Metrics -->
+            <div
+              class="pt-4 grid grid-cols-3 gap-2 sm:flex sm:items-center sm:gap-6 border-t border-slateborder hero-stagger-item hero-delay-6"
+            >
+              <div>
+                <p
+                  class="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight"
+                >
+                  1.850+
+                </p>
+                <p class="text-[11px] sm:text-xs text-slate-400">
+                  Kamar Terverifikasi
+                </p>
+              </div>
+              <div class="hidden sm:block h-8 w-px bg-slateborder"></div>
+              <div>
+                <p
+                  class="text-lg sm:text-xl md:text-2xl font-bold text-primary tracking-tight"
+                >
+                  100%
+                </p>
+                <p class="text-[11px] sm:text-xs text-slate-400">
+                  Garansi Rekber
+                </p>
+              </div>
+              <div class="hidden sm:block h-8 w-px bg-slateborder"></div>
+              <div>
+                <p
+                  class="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight"
+                >
+                  4.9/5
+                </p>
+                <p class="text-[11px] sm:text-xs text-slate-400">
+                  Kepuasan Rantau
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual Hero Card (Ultra-Transparent Layered Glass with Subtle 3D Tilt) -->
+          <div
+            class="lg:col-span-5 relative tilt-card-container hero-stagger-item hero-delay-card w-full"
+          >
+            <div
+              class="relative rounded-3xl glass-panel-elevated p-4 sm:p-5 lg:p-6 overflow-hidden tilt-card w-full"
+            >
+              <!-- Header Card with Status -->
+              <div
+                class="flex items-center justify-between pb-3 sm:pb-4 border-b border-slateborder"
+              >
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-2.5 h-2.5 rounded-full bg-primary shrink-0"
+                  ></span>
+                  <span class="text-xs font-semibold text-primary truncate"
+                    >Live Video Inspection Siap</span
+                  >
+                </div>
+                <span
+                  class="text-[11px] sm:text-xs px-2.5 py-1 rounded-full glass-panel text-slate-300 font-medium shrink-0"
+                  >Radius 400m Kampus</span
+                >
+              </div>
+
+              <!-- Image Kos Preview -->
+              <div
+                class="mt-4 relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#111827]"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80"
+                  alt="Kamar Kos Mahasiswa Bersih KostKita"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+
+                <!-- Floating Overlays on Image with Subtle Motion -->
+                <div
+                  class="absolute top-3 left-3 px-2.5 py-1 rounded-lg glass-pill text-[11px] font-semibold text-white flex items-center gap-1.5 floating-badge"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-primary shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>Inspeksi KostKita Verified</span>
+                </div>
+
+                <div
+                  class="absolute bottom-3 left-3 right-3 p-2.5 sm:p-3 rounded-xl glass-pill text-white floating-badge-delayed"
+                >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="truncate">
+                      <h3
+                        class="font-bold text-xs sm:text-sm leading-tight truncate"
+                      >
+                        Kos Griya Rantau Asri
+                      </h3>
+                      <p
+                        class="text-[10px] sm:text-[11px] text-slate-300 truncate"
+                      >
+                        5 Menit Jalan Kaki ke Gerbang Kampus
+                      </p>
+                    </div>
+                    <span
+                      class="text-xs sm:text-sm font-bold text-primary shrink-0"
+                      >Rp 1.35jt<span
+                        class="text-[10px] text-slate-400 font-normal"
+                        >/bln</span
+                      ></span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Transparency & Environmental Highlights Breakdown -->
+              <div
+                class="mt-3 sm:mt-4 grid grid-cols-3 gap-2 text-center text-xs"
+              >
+                <div class="p-2 sm:p-2.5 rounded-xl glass-panel">
+                  <p
+                    class="text-slate-400 text-[9px] sm:text-[10px] uppercase font-semibold"
+                  >
+                    Skor Banjir
+                  </p>
+                  <p class="font-bold text-primary text-xs sm:text-sm mt-0.5">
+                    A+ (Aman)
+                  </p>
+                </div>
+                <div class="p-2 sm:p-2.5 rounded-xl glass-panel">
+                  <p
+                    class="text-slate-400 text-[9px] sm:text-[10px] uppercase font-semibold"
+                  >
+                    Tingkat Bising
+                  </p>
+                  <p class="font-bold text-white text-xs sm:text-sm mt-0.5">
+                    Hening
+                  </p>
+                </div>
+                <div class="p-2 sm:p-2.5 rounded-xl glass-panel">
+                  <p
+                    class="text-slate-400 text-[9px] sm:text-[10px] uppercase font-semibold"
+                  >
+                    Biaya Tambahan
+                  </p>
+                  <p class="font-bold text-slate-300 text-xs sm:text-sm mt-0.5">
+                    0 Rupiah
+                  </p>
+                </div>
+              </div>
+
+              <!-- Escrow Guarantee Badge -->
+              <div
+                class="mt-3 sm:mt-3.5 p-3 rounded-xl glass-panel flex items-center justify-between gap-2"
+              >
+                <div class="flex items-center gap-2 sm:gap-2.5 truncate">
+                  <div
+                    class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0"
+                  >
+                    <svg
+                      class="w-3.5 h-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.5"
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="truncate">
+                    <p class="text-xs font-semibold text-white truncate">
+                      Escrow Payment Protection
+                    </p>
+                    <p class="text-[10px] text-slate-400 truncate">
+                      DP tertahan aman sampai kamu cek fisik
+                    </p>
+                  </div>
+                </div>
+                <span
+                  class="text-[11px] font-bold text-primary uppercase shrink-0"
+                  >Aktif</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. PROBLEM SECTION (Tantangan Mahasiswa Rantau) ==================== -->
+      <section
+        id="masalah"
+        class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 border-t border-slateborder reveal-on-scroll"
+      >
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-primary"
+            >Realita Mahasiswa Rantau</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-2"
+          >
+            Kenapa Cari Kos Sendiri Sering Jadi
+            <em class="italic font-serif text-slate-300">Mimpi Buruk</em>?
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base mt-3">
+            Jauh dari kampung halaman, diburu waktu ospek, tapi justru terjebak
+            iklan zonk dan uang muka raib.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5"
+        >
+          <!-- Problem 1 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-1"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Penipuan Iklan & DP Hangus
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Transfer uang muka jutaan rupiah ke pengelola bodong di media
+              sosial, pas tiba di lokasi ternyata rumah orang lain.
+            </p>
+          </div>
+
+          <!-- Problem 2 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-2"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Foto Estetik, Aslinya Zonk
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Foto wide-angle tahun lama yang menipu. Realitanya tembok lembap
+              berjamur, pengap, dan toilet mampet.
+            </p>
+          </div>
+
+          <!-- Problem 3 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-3"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Biaya Tambahan Tak Transparan
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Awalnya dibilang murah, tiba-tiba ditagih biaya sampah siluman,
+              iuran parkir motor, hingga listrik tanpa meteran jelas.
+            </p>
+          </div>
+
+          <!-- Problem 4 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-4"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Langganan Banjir & Bising
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Baru tahu setelah bayar kalau akses jalan tergenang air tiap hujan
+              deras, atau samping kamar persis bengkel berisik.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. MANFAAT & USP SECTION ==================== -->
+      <section
+        id="manfaat"
+        class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 border-t border-slateborder reveal-on-scroll"
+      >
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-primary"
+            >Solusi & Keunggulan Unik (USP)</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-2"
+          >
+            Pilar Keamanan & Kenyamanan Anak Rantau
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-3">
+            Sistem perlindungan finansial escrow, tim verifikator lapangan, dan
+            kurasi lingkungan berbasis data riil.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
+        >
+          <!-- USP 1: Escrow Rekber -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-1"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-5"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <span
+              class="text-[11px] font-bold uppercase tracking-wider text-primary"
+              >Proteksi Finansial</span
+            >
+            <h3 class="text-lg font-bold text-white mt-1 mb-2">
+              Rekber Escrow & Kontrak Digital
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Uang DP dan sewa tidak langsung dilepas ke pemilik. Dana aman
+              tertahan di akun escrow KostKita sampai kamu tiba, memeriksa fisik
+              kamar, dan menandatangani kontrak digital resmi.
+            </p>
+          </div>
+
+          <!-- USP 2: Live Video Inspection & Free Survey -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-2"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-5"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <span
+              class="text-[11px] font-bold uppercase tracking-wider text-primary"
+              >Survei Tanpa Komitmen</span
+            >
+            <h3 class="text-lg font-bold text-white mt-1 mb-2">
+              Live Video Inspection & Survei Gratis
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Masih di luar pulau? Minta tim lapangan kami video call langsung
+              dari kamar kos pilihanmu: cek debit air, sinyal internet, colokan,
+              hingga kebersihan kamar mandi sebelum bayar.
+            </p>
+          </div>
+
+          <!-- USP 3: KostAdvisor 1-on-1 -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-3"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-5"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+                />
+              </svg>
+            </div>
+            <span
+              class="text-[11px] font-bold uppercase tracking-wider text-primary"
+              >Konsultan 1-on-1</span
+            >
+            <h3 class="text-lg font-bold text-white mt-1 mb-2">
+              KostAdvisor: "Cari Kos Cocok"
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Bukan sekadar form kaku. Beritahu kebutuhanmu: apakah butuh
+              suasana hening untuk fokus skripsi, bawa kendaraan, atau butuh jam
+              malam bebas? Advisor kami kurasikan yang paling tepat.
+            </p>
+          </div>
+
+          <!-- USP 4: Skor Lingkungan Anti Banjir & Bising -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-4"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-5"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <span
+              class="text-[11px] font-bold uppercase tracking-wider text-primary"
+              >Data Riil Lingkungan</span
+            >
+            <h3 class="text-lg font-bold text-white mt-1 mb-2">
+              Skor Bebas Banjir & Anti-Bising
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Data historis curah hujan dan potensi banjir 5 tahun terakhir,
+              estimasi desibel kebisingan malam hari, serta sistem keamanan gang
+              (portal malam / pos ronda aktif).
+            </p>
+          </div>
+
+          <!-- USP 5: Peta Kuliner, Minimarket & Laundry -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-5"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-5"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <span
+              class="text-[11px] font-bold uppercase tracking-wider text-primary"
+              >Kebutuhan Harian Terjamin</span
+            >
+            <h3 class="text-lg font-bold text-white mt-1 mb-2">
+              Peta Kuliner & Fasilitas Sekitar
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Informasi jarak langkah kaki menuju warung makan murah kantong
+              mahasiswa, minimarket 24 jam, laundry kiloan, dan jalur angkutan
+              umum atau shuttle kampus.
+            </p>
+          </div>
+
+          <!-- USP 6: Transparansi Biaya Mutlak -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive reveal-on-scroll reveal-delay-6"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-5"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <span
+              class="text-[11px] font-bold uppercase tracking-wider text-primary"
+              >Biaya Terbuka</span
+            >
+            <h3 class="text-lg font-bold text-white mt-1 mb-2">
+              Rincian Tagihan & Kontrak Transparan
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Apa yang tertulis adalah apa yang kamu bayar. Biaya token listrik,
+              iuran air, parkir motor, dan deposit dicantumkan terbuka dalam
+              lembar perjanjian sebelum sewa dimulai.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5. ALUR KERJA RACE (Bedah Kos, Konsultasi, Booking, Cerita) ==================== -->
+      <section
+        id="alur-race"
+        class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 border-t border-slateborder reveal-on-scroll"
+      >
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-primary"
+            >Framework R-A-C-E</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-2"
+          >
+            4 Langkah Pasti Menemukan Kos Idaman
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-3">
+            Dari eksplorasi kamar tanpa filter hingga serah terima kunci
+            bergaransi penuh.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
+        >
+          <!-- Step 1 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl relative border-t-2 border-t-primary glass-interactive reveal-on-scroll reveal-delay-1"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm flex items-center justify-center mb-4"
+            >
+              01
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Reach: Bedah Kos Tanpa Filter
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Tonton video review unedited, tur kamar 360°, dan laporan faktual
+              kondisi kamar tanpa sudut kamera tipu-tipu.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl relative border-t-2 border-t-primary glass-interactive reveal-on-scroll reveal-delay-2"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm flex items-center justify-center mb-4"
+            >
+              02
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Act: Konsultasi & Free Survey
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Pakai form <em>Cari Kos Cocok</em> atau jadwalkan
+              <em>Live Video Inspection</em> gratis langsung bersama tim
+              KostAdvisor.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl relative border-t-2 border-t-primary glass-interactive reveal-on-scroll reveal-delay-3"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm flex items-center justify-center mb-4"
+            >
+              03
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Convert: Booking Escrow
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Kunci kamar dengan pembayaran aman ke Rekber KostKita & tanda
+              tangan digital contract. Uang aman sampai terima kunci.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div
+            class="glass-panel p-5 sm:p-6 rounded-2xl relative border-t-2 border-t-primary glass-interactive reveal-on-scroll reveal-delay-4"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm flex items-center justify-center mb-4"
+            >
+              04
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">
+              Engage: Cerita Kos & Reward
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Tinggalkan ulasan jujur di <em>"Cerita Kos Gue"</em>, bagikan ke
+              kawan rantau, dan raih potongan sewa untuk bulan berikutnya.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 6. BUKTI SOSIAL (Testimoni & Cerita Kos Gue) ==================== -->
+      <section
+        id="testimoni"
+        class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 border-t border-slateborder reveal-on-scroll"
+      >
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-primary"
+            >Bukti Sosial & Komunitas</span
+          >
+          <h2
+            class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-2"
+          >
+            "Cerita Kos Gue" - Suara Nyata Anak Rantau
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-3">
+            Pengalaman langsung mahasiswa yang kuliah dengan tenang tanpa cemas
+            urusan kos.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+          <!-- Testimoni 1 -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive flex flex-col justify-between reveal-on-scroll reveal-delay-1"
+          >
+            <div>
+              <div
+                class="flex items-center gap-1 text-primary mb-3 sm:mb-4 text-sm"
+              >
+                ★ ★ ★ ★ ★
+                <span class="text-xs text-slate-400 ml-2 font-medium"
+                  >5.0 / UI Depok</span
+                >
+              </div>
+              <p
+                class="text-slate-300 text-sm leading-relaxed italic mb-5 sm:mb-6"
+              >
+                "Pertama kali ke Jawa dari Padang, takut banget kena tipu
+                transfer DP. Pas pakai KostKita, DP ditahan di Rekber sampai gue
+                tiba di kos dan coba kunci kamar sendiri. Uang aman, ortu pun
+                tenang."
+              </p>
+            </div>
+            <div
+              class="flex items-center gap-3 pt-4 border-t border-slateborder"
+            >
+              <div
+                class="w-9 h-9 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-xs shrink-0"
+              >
+                RF
+              </div>
+              <div class="truncate">
+                <h4 class="text-sm font-bold text-white truncate">
+                  Rafi Fadillah
+                </h4>
+                <p class="text-xs text-slate-400 truncate">
+                  Teknik Industri UI • Rantau Padang
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimoni 2 -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive flex flex-col justify-between reveal-on-scroll reveal-delay-2"
+          >
+            <div>
+              <div
+                class="flex items-center gap-1 text-primary mb-3 sm:mb-4 text-sm"
+              >
+                ★ ★ ★ ★ ★
+                <span class="text-xs text-slate-400 ml-2 font-medium"
+                  >5.0 / UGM Jogja</span
+                >
+              </div>
+              <p
+                class="text-slate-300 text-sm leading-relaxed italic mb-5 sm:mb-6"
+              >
+                "Paling ngebantu fitur Live Video Inspection-nya. Tim KostKita
+                beneran ngecek sinyal HP di dalam kamar dan debit air shower
+                waktu video call. Semuanya transparan dan gratis tanpa biaya
+                survei."
+              </p>
+            </div>
+            <div
+              class="flex items-center gap-3 pt-4 border-t border-slateborder"
+            >
+              <div
+                class="w-9 h-9 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-xs shrink-0"
+              >
+                NA
+              </div>
+              <div class="truncate">
+                <h4 class="text-sm font-bold text-white truncate">
+                  Nabila Azzahra
+                </h4>
+                <p class="text-xs text-slate-400 truncate">
+                  Kedokteran UGM • Rantau Balikpapan
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimoni 3 -->
+          <div
+            class="glass-panel-elevated p-5 sm:p-6 rounded-2xl glass-interactive flex flex-col justify-between reveal-on-scroll reveal-delay-3"
+          >
+            <div>
+              <div
+                class="flex items-center gap-1 text-primary mb-3 sm:mb-4 text-sm"
+              >
+                ★ ★ ★ ★ ★
+                <span class="text-xs text-slate-400 ml-2 font-medium"
+                  >4.9 / ITB Bandung</span
+                >
+              </div>
+              <p
+                class="text-slate-300 text-sm leading-relaxed italic mb-5 sm:mb-6"
+              >
+                "Skor lingkungannya terbukti akurat. Waktu musim hujan deras
+                kemarin jalan depan kos tetap kering aman, warteg 24 jam cuma 50
+                meter. Rekomendasi KostAdvisor beneran pas di kantong anak
+                rantau."
+              </p>
+            </div>
+            <div
+              class="flex items-center gap-3 pt-4 border-t border-slateborder"
+            >
+              <div
+                class="w-9 h-9 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-xs shrink-0"
+              >
+                DS
+              </div>
+              <div class="truncate">
+                <h4 class="text-sm font-bold text-white truncate">
+                  Dimas Satria
+                </h4>
+                <p class="text-xs text-slate-400 truncate">
+                  STEI ITB • Rantau Surabaya
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 7. FORM SINGKAT KOSTADVISOR ==================== -->
+      <section
+        id="konsultasi"
+        class="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 border-t border-slateborder reveal-on-scroll"
+      >
+        <div
+          class="glass-panel-elevated rounded-3xl p-5 sm:p-8 md:p-10 relative overflow-hidden shadow-2xl"
+        >
+          <div class="max-w-2xl mx-auto text-center mb-6 sm:mb-8">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel text-primary text-xs font-bold uppercase tracking-wider mb-3"
+            >
+              <span>KostAdvisor 1-on-1 Matching</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+              "Cari Kos yang Cocok Buat Gue"
+            </h2>
+            <p class="text-slate-300 text-xs sm:text-sm mt-2">
+              Isi preferensi singkat di bawah ini. Tim kurator kami akan
+              mengirimkan opsi kos terverifikasi bebas banjir dan aman escrow ke
+              WhatsApp kamu.
+            </p>
+          </div>
+
+          <!-- Form Status Message Notification -->
+          <div
+            id="form-status"
+            class="hidden mb-6 p-4 rounded-xl text-sm"
+            role="alert"
+          ></div>
+
+          <form id="advisor-form" class="space-y-4 sm:space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <!-- Nama Lengkap -->
+              <div>
+                <label
+                  for="user-name"
+                  class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+                >
+                  Nama Lengkap / Panggilan <span class="text-primary">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="user-name"
+                  name="name"
+                  required
+                  placeholder="Contoh: Budi Santoso"
+                  class="w-full px-4 py-3 rounded-xl glass-input text-white placeholder-slate-500 text-sm"
+                />
+              </div>
+
+              <!-- Kontak WhatsApp -->
+              <div>
+                <label
+                  for="user-wa"
+                  class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+                >
+                  Nomor WhatsApp Aktif <span class="text-primary">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="user-wa"
+                  name="whatsapp"
+                  required
+                  placeholder="0812-xxxx-xxxx"
+                  class="w-full px-4 py-3 rounded-xl glass-input text-white placeholder-slate-500 text-sm"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <!-- Kampus Tujuan -->
+              <div>
+                <label
+                  for="user-campus"
+                  class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+                >
+                  Kampus Tujuan <span class="text-primary">*</span>
+                </label>
+                <select
+                  id="user-campus"
+                  name="campus"
+                  required
+                  class="w-full px-4 py-3 rounded-xl glass-input text-white bg-[#0f172a] text-sm"
+                >
+                  <option value="" disabled selected>
+                    Pilih Area Kampus Kamu
+                  </option>
+                  <option value="Universitas Indonesia (UI) Depok">
+                    UI Depok & Sekitarnya
+                  </option>
+                  <option value="Universitas Gadjah Mada (UGM) Jogja">
+                    UGM & UNY Yogyakarta
+                  </option>
+                  <option value="Institut Teknologi Bandung (ITB)">
+                    ITB & Unpad Jatinangor
+                  </option>
+                  <option value="Institut Teknologi Sepuluh Nopember (ITS)">
+                    ITS & Unair Surabaya
+                  </option>
+                  <option value="Universitas Diponegoro (Undip)">
+                    Undip Semarang (Tembalang)
+                  </option>
+                  <option value="Universitas Brawijaya (UB) Malang">
+                    UB & UM Malang
+                  </option>
+                  <option value="Lainnya">Area Kampus Lainnya</option>
+                </select>
+              </div>
+
+              <!-- Kisaran Budget Bulanan -->
+              <div>
+                <label
+                  for="user-budget"
+                  class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2"
+                >
+                  Kisaran Budget Bulanan <span class="text-primary">*</span>
+                </label>
+                <select
+                  id="user-budget"
+                  name="budget"
+                  required
+                  class="w-full px-4 py-3 rounded-xl glass-input text-white bg-[#0f172a] text-sm"
+                >
+                  <option value="" disabled selected>
+                    Pilih Rentang Budget
+                  </option>
+                  <option value="< Rp 850.000 / bulan">
+                    Di bawah Rp 850.000 (Hemat / Kamar Mandi Luar)
+                  </option>
+                  <option value="Rp 900.000 - Rp 1.500.000 / bulan">
+                    Rp 900.000 - Rp 1.500.000 (Standar / Kamar Mandi Dalam)
+                  </option>
+                  <option value="Rp 1.600.000 - Rp 2.500.000 / bulan">
+                    Rp 1.600.000 - Rp 2.500.000 (Lengkap AC + WiFi Cepat)
+                  </option>
+                  <option value="> Rp 2.500.000 / bulan">
+                    Di atas Rp 2.500.000 (Eksklusif / Full Furnished)
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Preferensi Utama Checkbox -->
+            <div>
+              <label
+                class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2.5"
+              >
+                Preferensi Utama (Boleh Pilih Lebih dari 1)
+              </label>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3"
+              >
+                <label
+                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    name="preferences"
+                    value="Dekat Kampus (<500m)"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                  />
+                  <span>Jalan Kaki ke Kampus</span>
+                </label>
+                <label
+                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    name="preferences"
+                    value="Bebas Banjir Pasti"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    checked
+                  />
+                  <span>Skor Bebas Banjir</span>
+                </label>
+                <label
+                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    name="preferences"
+                    value="Dekat Kuliner Murah & Mart"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    checked
+                  />
+                  <span>Dekat Kuliner & Mart</span>
+                </label>
+                <label
+                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    name="preferences"
+                    value="Lingkungan Hening Belajar"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                  />
+                  <span>Hening Anti-Bising</span>
+                </label>
+                <label
+                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    name="preferences"
+                    value="Bebas Jam Malam"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                  />
+                  <span>Akses 24 Jam Bebas</span>
+                </label>
+                <label
+                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    name="preferences"
+                    value="Parkir Motor Luas & Aman"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                  />
+                  <span>Parkiran Motor Aman</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Submit Button (Solid Primary with Tactile Press) -->
+            <div class="pt-2">
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full py-3.5 sm:py-4 rounded-xl text-sm sm:text-base font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 shadow-sm btn-press"
+              >
+                <span>Kirim Preferensi & Dapatkan Rekomendasi Gratis</span>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </button>
+              <p
+                class="text-center text-[11px] sm:text-xs text-slate-400 mt-2.5"
+              >
+                100% Layanan Bebas Biaya Konsultasi • Data kontak dijaga
+                kerahasiaannya
+              </p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ==================== 8. FAQ RINGKAS ==================== -->
+      <section
+        class="max-w-4xl mx-auto px-4 sm:px-6 py-10 pb-16 sm:pb-20 border-t border-slateborder reveal-on-scroll"
+      >
+        <div class="text-center mb-8">
+          <h3 class="text-xl font-bold text-white">
+            Pertanyaan Sering Ditanyakan (FAQ)
+          </h3>
+        </div>
+        <div class="space-y-3 sm:space-y-4 text-sm">
+          <div class="glass-panel p-4 sm:p-5 rounded-xl">
+            <h4 class="font-bold text-primary mb-1 text-sm sm:text-base">
+              Bagaimana jika setelah survei kamar ternyata tidak cocok?
+            </h4>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Tidak ada paksaan sama sekali! Layanan
+              <em>Live Video Inspection</em> dan survei dari KostKita 100%
+              gratis tanpa komitmen uang muka.
+            </p>
+          </div>
+          <div class="glass-panel p-4 sm:p-5 rounded-xl">
+            <h4 class="font-bold text-primary mb-1 text-sm sm:text-base">
+              Kapan uang sewa saya diteruskan ke pemilik kos?
+            </h4>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Uang di Rekber Escrow baru dicairkan setelah kamu tiba di lokasi
+              fisik kos, memverifikasi kondisi kamar, dan menerima kunci kamar
+              fisik.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer
+      class="border-t border-slateborder bg-obsidian py-10 sm:py-12 relative z-10 text-xs text-slate-400"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8"
+      >
+        <!-- Col 1 -->
+        <div class="sm:col-span-2 space-y-3">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs"
+            >
+              <svg
+                class="w-3.5 h-3.5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+            </div>
+            <span class="font-expressive text-xl text-offwhite tracking-wide"
+              >KostKita</span
+            >
+          </div>
+          <p class="text-slate-400 max-w-sm leading-relaxed">
+            Platform pencarian dan manajemen kos khusus mahasiswa rantau.
+            Menghadirkan rasa aman finansial dengan Rekber Escrow dan verifikasi
+            kamar langsung di lapangan.
+          </p>
+          <p class="text-primary font-medium italic text-[11px]">
+            "Kost aman, uang aman, kuliah tenang."
+          </p>
+        </div>
+
+        <!-- Col 2 -->
+        <div>
+          <h4
+            class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]"
+          >
+            Fitur Unggulan
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a href="#manfaat" class="hover:text-primary transition-colors"
+                >Rekber Anti-Tipu (Escrow)</a
+              >
+            </li>
+            <li>
+              <a href="#manfaat" class="hover:text-primary transition-colors"
+                >Live Video Inspection</a
+              >
+            </li>
+            <li>
+              <a href="#konsultasi" class="hover:text-primary transition-colors"
+                >KostAdvisor 1-on-1</a
+              >
+            </li>
+            <li>
+              <a href="#manfaat" class="hover:text-primary transition-colors"
+                >Skor Bebas Banjir & Bising</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div>
+          <h4
+            class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]"
+          >
+            Komunitas & Edukasi
+          </h4>
+          <ul class="space-y-2">
+            <li>
+              <a href="#alur-race" class="hover:text-primary transition-colors"
+                >Bedah Kos Tanpa Filter</a
+              >
+            </li>
+            <li>
+              <a href="#testimoni" class="hover:text-primary transition-colors"
+                >Cerita Kos Gue</a
+              >
+            </li>
+            <li>
+              <a href="#konsultasi" class="hover:text-primary transition-colors"
+                >Poin Referral Rantau</a
+              >
+            </li>
+            <li>
+              <a href="#masalah" class="hover:text-primary transition-colors"
+                >Tips Hindari Penipuan DP</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 pt-6 border-t border-slateborder flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-center sm:text-left"
+      >
+        <p>© 2026 KostKita Indonesia. Hak Cipta Dilindungi.</p>
+        <div
+          class="flex flex-wrap justify-center sm:justify-end items-center gap-3 sm:gap-4 text-[11px]"
+        >
+          <a href="#" class="hover:text-slate-300">Syarat & Ketentuan Escrow</a>
+          <a href="#" class="hover:text-slate-300">Kebijakan Privasi</a>
+          <a href="#" class="hover:text-slate-300">Bantuan 24/7</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Main JavaScript File -->
+    <script src="script.js"></script>
+  </body>
+</html>
