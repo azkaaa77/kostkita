@@ -1290,25 +1290,36 @@
                   <option value="" disabled selected>
                     Pilih Area Kampus Kamu
                   </option>
-                  <option value="Universitas Indonesia (UI) Depok">
-                    UI Depok & Sekitarnya
+                  <option value="Kebon Jeruk / MNC University & Binus Anggrek">
+                    Kebon Jeruk / MNC University & Sekitarnya
                   </option>
-                  <option value="Universitas Gadjah Mada (UGM) Jogja">
-                    UGM & UNY Yogyakarta
+                  <option value="Kemanggisan / BINUS Syahdan & Kijang">
+                    Kemanggisan / BINUS University
                   </option>
-                  <option value="Institut Teknologi Bandung (ITB)">
-                    ITB & Unpad Jatinangor
+                  <option value="Depok / Universitas Indonesia (UI) & Gunadarma">
+                    Depok / UI & Gunadarma
                   </option>
-                  <option value="Institut Teknologi Sepuluh Nopember (ITS)">
-                    ITS & Unair Surabaya
+                  <option value="Jatinangor / Universitas Padjadjaran (Unpad) & ITB">
+                    Jatinangor / Unpad & ITB
                   </option>
-                  <option value="Universitas Diponegoro (Undip)">
-                    Undip Semarang (Tembalang)
+                  <option value="Bandung Tengah / ITB Ganesha & Unpar">
+                    Bandung Tengah / ITB & Unpar
                   </option>
-                  <option value="Universitas Brawijaya (UB) Malang">
-                    UB & UM Malang
+                  <option value="Yogyakarta / Universitas Gadjah Mada (UGM) & UNY">
+                    Yogyakarta / UGM & UNY
                   </option>
-                  <option value="Lainnya">Area Kampus Lainnya</option>
+                  <option value="Malang / Universitas Brawijaya (UB) & UM">
+                    Malang / UB & UM
+                  </option>
+                  <option value="Surabaya / ITS & Universitas Airlangga (Unair)">
+                    Surabaya / ITS & Unair
+                  </option>
+                  <option value="Semarang / Universitas Diponegoro (Undip)">
+                    Semarang / Undip Tembalang
+                  </option>
+                  <option value="Kampus / Area Lainnya">
+                    Kampus / Area Lainnya
+                  </option>
                 </select>
               </div>
 
@@ -1329,17 +1340,17 @@
                   <option value="" disabled selected>
                     Pilih Rentang Budget
                   </option>
-                  <option value="< Rp 850.000 / bulan">
-                    Di bawah Rp 850.000 (Hemat / Kamar Mandi Luar)
+                  <option value="< Rp 1.000.000 / bulan">
+                    &lt; Rp 1.000.000 / bulan (Hemat & Nyaman)
                   </option>
-                  <option value="Rp 900.000 - Rp 1.500.000 / bulan">
-                    Rp 900.000 - Rp 1.500.000 (Standar / Kamar Mandi Dalam)
+                  <option value="Rp 1.000.000 - Rp 1.500.000 / bulan">
+                    Rp 1.000.000 – Rp 1.500.000 / bulan (Standar Kamar Mandi Dalam)
                   </option>
-                  <option value="Rp 1.600.000 - Rp 2.500.000 / bulan">
-                    Rp 1.600.000 - Rp 2.500.000 (Lengkap AC + WiFi Cepat)
+                  <option value="Rp 1.500.000 - Rp 2.500.000 / bulan">
+                    Rp 1.500.000 – Rp 2.500.000 / bulan (AC, WiFi Cepat & Lengkap)
                   </option>
                   <option value="> Rp 2.500.000 / bulan">
-                    Di atas Rp 2.500.000 (Eksklusif / Full Furnished)
+                    &gt; Rp 2.500.000 / bulan (Eksklusif & Full Furnished)
                   </option>
                 </select>
               </div>
@@ -1356,72 +1367,72 @@
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3"
               >
                 <label
-                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                  class="flex items-start gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors min-w-0"
                 >
                   <input
                     type="checkbox"
                     name="preferences"
                     value="Dekat Kampus (<500m)"
-                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder mt-0.5 shrink-0"
                   />
-                  <span>Jalan Kaki ke Kampus</span>
+                  <span class="leading-relaxed whitespace-normal break-words">Jalan Kaki ke Kampus</span>
                 </label>
                 <label
-                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                  class="flex items-start gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors min-w-0"
                 >
                   <input
                     type="checkbox"
                     name="preferences"
                     value="Bebas Banjir Pasti"
-                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder mt-0.5 shrink-0"
                     checked
                   />
-                  <span>Skor Bebas Banjir</span>
+                  <span class="leading-relaxed whitespace-normal break-words">Skor Bebas Banjir</span>
                 </label>
                 <label
-                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                  class="flex items-start gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors min-w-0"
                 >
                   <input
                     type="checkbox"
                     name="preferences"
                     value="Dekat Kuliner Murah & Mart"
-                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder mt-0.5 shrink-0"
                     checked
                   />
-                  <span>Dekat Kuliner & Mart</span>
+                  <span class="leading-relaxed whitespace-normal break-words">Dekat Kuliner &amp; Mart</span>
                 </label>
                 <label
-                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                  class="flex items-start gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors min-w-0"
                 >
                   <input
                     type="checkbox"
                     name="preferences"
                     value="Lingkungan Hening Belajar"
-                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder mt-0.5 shrink-0"
                   />
-                  <span>Hening Anti-Bising</span>
+                  <span class="leading-relaxed whitespace-normal break-words">Hening Anti-Bising</span>
                 </label>
                 <label
-                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                  class="flex items-start gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors min-w-0"
                 >
                   <input
                     type="checkbox"
                     name="preferences"
                     value="Bebas Jam Malam"
-                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder mt-0.5 shrink-0"
                   />
-                  <span>Akses 24 Jam Bebas</span>
+                  <span class="leading-relaxed whitespace-normal break-words">Akses 24 Jam Bebas</span>
                 </label>
                 <label
-                  class="flex items-center gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors"
+                  class="flex items-start gap-2.5 p-3 rounded-xl glass-panel text-xs text-slate-300 cursor-pointer hover:bg-white/10 active:bg-white/15 transition-colors min-w-0"
                 >
                   <input
                     type="checkbox"
                     name="preferences"
                     value="Parkir Motor Luas & Aman"
-                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder"
+                    class="rounded text-primary focus:ring-primary bg-slate-800 border-slateborder mt-0.5 shrink-0"
                   />
-                  <span>Parkiran Motor Aman</span>
+                  <span class="leading-relaxed whitespace-normal break-words">Parkiran Motor Aman</span>
                 </label>
               </div>
             </div>
